@@ -4,7 +4,6 @@ import './style.css';
 import CreateUser from "../CreateUser/CreateUser";
 import ChatBox from "../ChatBox/ChatBox";
 
-
 const host = "http://localhost:5000";
 
 export default function Home() {
@@ -28,7 +27,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-        socketRef.current = io(host, { transports: ['websocket'], 'sync disconnect on unload': true });
+        socketRef.current = io(host,{ transports: ['websocket'], 'sync disconnect on unload': true });
 
         socketRef.current.on('namesake', () => {
             handleNamesake();
