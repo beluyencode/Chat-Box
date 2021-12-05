@@ -1,0 +1,123 @@
+.chat-box {
+    color: rgb(213, 212, 212);
+    display: flex;
+    width: 750px;
+    height: 480px; 
+    padding-top: 10px;
+    margin: auto;
+    padding-bottom: 10px;
+}
+.user-online {
+    flex-grow: 2.5;
+    border-right:0.5px solid rgb(213, 212, 212) ;
+    max-width: 187.5px;
+}
+.chat-area {
+    flex-grow: 7.5;
+
+    max-width: 561.5px;
+}
+.title-user{
+    border-bottom: 0.5px solid rgb(213, 212, 212);
+    padding: 8px;
+    font-weight: 600;
+}
+
+.user {
+    overflow-y: scroll;
+    max-width: 187.5px;
+    height:432px;
+
+
+}
+.user::-webkit-scrollbar {
+    width: 4px;
+}
+.user::-webkit-scrollbar-thumb {
+    background-color: rgb(41, 41, 41);
+    border-radius: 2px;
+}
+.user-info{
+    padding: 5px;
+}
+.chat-title{
+    height:37px;
+    border-bottom: 0.5px solid rgb(213, 212, 212);
+    
+}
+.chat-box-area{
+    height:381px;
+    overflow-y: scroll;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+.chat-box-area::-webkit-scrollbar {
+    width: 4px;
+}
+.chat-box-area::-webkit-scrollbar-thumb {
+    background-color: rgb(41, 41, 41);
+    border-radius: 2px;
+}
+.inbox-right {
+    color:white;
+    max-width: 210px;
+    float:right;
+    text-align: left;
+    /* padding: 10px; */
+    margin-bottom: 4px;
+    font-size: 13px;
+    min-height: 17px;
+    clear: both;
+    word-wrap: break-word;
+}
+.inbox-left {
+    color:white;
+    max-width: 210px;
+    float:left;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    font-size: 13px;
+    text-align:left;
+    clear: both;    
+    word-wrap: break-word;
+}
+.mess{
+    background-color: #3e4042;
+    padding: 7px 10px;
+    border-radius: 5px;
+    min-height: 17px;
+}
+.inbox-input {
+    bottom:0px;
+    height: 41px;
+    line-height: 35px;
+    border-top: 0.5px solid rgb(213, 212, 212);
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+.input-inbox {
+    padding: 8px;
+    margin-top: 5px;
+    border: 0.5px solid rgb(213, 212, 212);    
+    background-color: rgb(41, 41, 41);
+    color : white;
+    width: 440px;
+}
+.sub-mess{
+    float: left;
+}
+.btn-send {
+    width: 78px;
+    height: 34px;
+    background-color: rgb(41, 41, 41);  
+    border: 0.5px solid rgb(213, 212, 212);    
+    color: white;
+    font-size: 16px;
+    margin-top: 5px;
+}
+.btn-send:hover {
+    cursor: pointer;
+}

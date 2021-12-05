@@ -1,0 +1,10 @@
+.main_chatBox{
+    position: fixed; 
+    width: 800px;
+    height: 500px;
+    background-color: rgb(41, 41, 41);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+}
