@@ -85,8 +85,7 @@ export default function ChatBox(props) {
                                     <div style={{ textAlign: "left", fontSize: 10 }}>
                                         {item.name}
                                     </div>
-                                    <div className="mess">
-                                        {item.mess}
+                                    <div className="mess" dangerouslySetInnerHTML={{ __html: item.mess }}>
                                     </div>
                                 </div>
                             </React.Fragment>

@@ -10,7 +10,7 @@ export default function Home() {
     const [namesake, setNamesake] = useState(true);
     const [user, setUser] = useState({});
     const [userArray, setUserArray] = useState([]);
-    const [messArray,setMessArray] = useState([]);
+    const [messArray, setMessArray] = useState([]);
     const socketRef = useRef();
 
 
@@ -22,12 +22,12 @@ export default function Home() {
         setNamesake(false);
     }
 
-    const handleClickSend = (data) => { 
-        socketRef.current.emit("client-send-data",{mess:data,name:user.name});
+    const handleClickSend = (data) => {
+        socketRef.current.emit("client-send-data", { mess: data, name: user.name });
     }
 
     useEffect(() => {
-        socketRef.current = io(host,{ transports: ['websocket'], 'sync disconnect on unload': true });
+        socketRef.current = io(host, { transports: ['websocket'], 'sync disconnect on unload': true });
 
         socketRef.current.on('namesake', () => {
             handleNamesake();
@@ -35,18 +35,30 @@ export default function Home() {
 
         socketRef.current.on('successful-name-creation', (user, userArray) => {
             setUser(user);
-
+            localStorage.setItem('user', JSON.stringify(user));
         });
 
-        socketRef.current.on('server-send-data',(data) => {
+        socketRef.current.on('server-send-data', (data) => {
+            console.log(messArray);
             setMessArray((prev) => {
-                return [...prev,data];
+                return [...prev, data];
+            })
+        })
+
+        socketRef.current.on('get-mess', (data) => {
+            setMessArray((prev) => {
+                return [...prev, ...data];
             })
         })
 
         socketRef.current.on("user-online", (data) => {
             setUserArray(data);
         })
+
+        if (localStorage.getItem('user')) {
+            setUser(JSON.parse(localStorage.getItem('user')));
+            socketRef.current.emit("login", JSON.parse(localStorage.getItem('user')));
+        }
 
     }, [])
 
@@ -56,7 +68,7 @@ export default function Home() {
                 {JSON.stringify(user) === '{}' ?
                     <CreateUser click={handleClickNext} namesake={namesake} />
                     :
-                    <ChatBox userArray={userArray} user={user} send={handleClickSend} messArray={messArray}/>
+                    <ChatBox userArray={userArray} user={user} send={handleClickSend} messArray={messArray} />
                 }
             </div>
         </>

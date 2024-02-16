@@ -11,31 +11,42 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 // app.use(express.static("build"));
 
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.resolve(__dirname,"build","index.html"))
-// })
+app.get('/get-profile', function (req, res) {
+  res.json(User);
+})
 
 var User = [];
-
+var dataMes = [];
 
 io.on('connection', (socket) => {
-  socket.on('create-name',(data) => {
-    if(User.filter((user) => {return user.name === data }).length ===0){
-      User.push({name:data,id:socket.id});
-      socket.emit('successful-name-creation',User.find((user) => {return user.id === socket.id}));
-      io.sockets.emit('user-online',User);
-    }else {
+  socket.on('create-name', (data) => {
+    if (User.filter((user) => { return user.name === data }).length === 0) {
+      User.push({ name: data, id: socket.id });
+      socket.emit('successful-name-creation', User.find((user) => { return user.id === socket.id }));
+      io.sockets.emit('user-online', User);
+      console.log(dataMes);
+    } else {
       socket.emit('namesake');
     }
   })
 
-  socket.on('client-send-data',(data) => {
-    io.sockets.emit('server-send-data',data);
+  socket.on('client-send-data', (data) => {
+    dataMes.push({
+      ...data,
+      cookie: Math.random()
+    })
+    io.sockets.emit('server-send-data', data);
   })
 
+  socket.on('login', (user) => {
+    User.push(user);
+    io.sockets.emit('user-online', User);
+    io.sockets.emit('get-mess', dataMes);
+  });
+
   socket.on('disconnect', () => {
-    User = User.filter((item) => {return item.id !== socket.id})
-    io.sockets.emit('user-online',User);
+    // User = User.filter((item) => { return item.id !== socket.id })
+    io.sockets.emit('user-online', User);
   });
 });
 
